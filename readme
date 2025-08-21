@@ -1,3 +1,4 @@
+
 # Object-Semantic Alignment Across Domains: Enhancing Domain Invariance of Facial Expression Features for Unsupervised Domain Adaptation
 This repository is the official implementation of “Object-Semantic Alignment Across Domains: Enhancing Domain Invariance of Facial Expression Features for Unsupervised Domain Adaptation”. JMIE reduces global domain shifts and enhances class-level domain invariance for unsupervised domain adaptation in cross-domain facial expression recognition.
 ## Data Preparation

@@ -1,4 +1,3 @@
-
 # Object-Semantic Alignment Across Domains: Enhancing Domain Invariance of Facial Expression Features for Unsupervised Domain Adaptation
 This repository is the official implementation of “Object-Semantic Alignment Across Domains: Enhancing Domain Invariance of Facial Expression Features for Unsupervised Domain Adaptation”. JMIE reduces global domain shifts and enhances class-level domain invariance for unsupervised domain adaptation in cross-domain facial expression recognition.
 ## Data Preparation
@@ -26,7 +25,7 @@ python main.py --source_train_path <path_to_source_train_data> --target_train_pa
 To evaluate my model, run:
 
 ```eval
-python test.py --model-file JMIE.pth 
+python test.py --model-file OSA.pth 
 ```
 
 ## Trained Models
@@ -36,7 +35,7 @@ You can download pretrained models here:
 --
 
 ## Contributing
-we propose an Object-Semantic Alignment (OSA) model by incorporating dynamic coordinate attention, joint mutual information, and marginal entropy loss to enhance the domain invariance of facial representations and reduce domain shifts.
+We propose an Object-Semantic Alignment (OSA) model that incorporates dynamic coordinate attention, joint mutual information, and marginal entropy loss to enhance the domain invariance of facial representations and mitigate domain shifts.
 ## Acknowledgment
 [Li Y, Zhang Z, Chen B, et al. Deep Margin-Sensitive Representation Learning for Cross-Domain Facial Expression Recognition[J]. IEEE Transactions on Multimedia, 2023, 25: 1359-1373.](https://ieeexplore.ieee.org/abstract/document/9676449)
 [Zhang S, Zhang Y, Zhang Y, et al. A dual-direction attention mixed feature network for facial expression recognition[J]. Electronics, 2023, 12(17): 3595.](https://github.com/SainingZhang/DDAMFN/tree/main)

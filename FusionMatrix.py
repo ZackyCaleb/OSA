@@ -7,33 +7,15 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 import torch
 import os
-from recordermeter import RecorderMeter
-from Trans_resnet import resnet50_with_adlayer, jdman_resnet50_with_adlayer
-from JDMAN_datasets import get_test_loader_pure_test
+from networks.DDAM import DDAMNet
+from datasets import get_test_loader_pure_test
 from torch.autograd import Variable
-from Trans_opts import args
+from opts import args
 from matplotlib import rcParams
+
 os.environ["CUDA_VISIBLE_DEVICES"] = args.nGPU
 def draw_confusion_matrix(label_true, label_pred, label_name, title="Confusion Matrix", pdf_save_path=None, dpi=100):
-    """
 
-    @param label_true: 真实标签，比如[0,1,2,7,4,5,...]
-    @param label_pred: 预测标签，比如[0,5,4,2,1,4,...]
-    @param label_name: 标签名字，比如['cat','dog','flower',...]
-    @param title: 图标题
-    @param pdf_save_path: 是否保存，是则为保存路径pdf_save_path=xxx.png | xxx.pdf | ...等其他plt.savefig支持的保存格式
-    @param dpi: 保存到文件的分辨率，论文一般要求至少300dpi
-    @return:
-
-    example：
-            draw_confusion_matrix(label_true=y_gt,
-                          label_pred=y_pred,
-                          label_name=["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise", "Neutral"],
-                          title="Confusion Matrix on Fer2013",
-                          pdf_save_path="Confusion_Matrix_on_Fer2013.png",
-                          dpi=300)
-
-    """
     cm = confusion_matrix(y_true=label_true, y_pred=label_pred, normalize='true')
     # 设置西文字体为新罗马字体
 
@@ -69,10 +51,7 @@ def draw_confusion_matrix(label_true, label_pred, label_name, title="Confusion M
 
 def get_catalogue():
     model_creators = dict()
-    # model_creators['resnet50_with_adlayer_all'] = resnet50_with_adlayer
-    model_creators['resnet50_with_adlayer_all'] = jdman_resnet50_with_adlayer
-    # model_creators['vgg16'] = vgg16_bn
-    # model_creators['vgg16_local_global'] = VGG_local_global
+    model_creators['DDAMNet'] = DDAMNet
     return model_creators
 
 def create_model(args):
@@ -83,13 +62,8 @@ def create_model(args):
 
     model = model_creators['resnet50_with_adlayer_all'](args)           # model结构
 
-    # adv_model = AdversarialNetwork(3072, 512, args.n_epochs * 112)
 
-    # save_path = os.path.join(args.save_path, 'ESPnet_42_acc_78.4000015258789.pth')  # 模型保存目录
-    # save_path = os.path.join(args.save_path, 'ESPnet_18_acc_71.93877410888672.pth')  # 模型保存目录
-    # save_path = os.path.join(args.save_path, 'ESPnet_40_acc_73.9795913696289.pth')  # 模型保存目录
-    # save_path = os.path.join(args.save_path, 'ESPnet_59_acc_67.5.pth')  # 模型保存目录
-    save_path = os.path.join(args.save_path, 'JMME', 'JMME_42_acc_52.663978576660156.pth')  # 模型保存目录
+    save_path = os.path.join(args.save_path, '..')  # 模型保存目录
     checkpoint = torch.load(save_path)
 
     model.load_state_dict(checkpoint['model'])  # 模型参数
@@ -130,8 +104,4 @@ if __name__ == '__main__':
 
     y_pred, y_gt = create_model(args)
     draw_confusion_matrix(y_gt, y_pred, label_name=["Surprise", "Fear", "Disgust", "Happy", "Sad", "Anger", "Neutral"],
-                          # title="KDEF w/o pop", pdf_save_path=r'F:\cross_domain_fer\papers/MMI_ESPnet.jpg', dpi=800)
-                          # title="KDEF w/o pop", pdf_save_path=r'F:\cross_domain_fer\papers/visualization/KDEF_ESPnet.jpg', dpi=800)
-                          # title="KDEF w/o pop", pdf_save_path=r'F:\cross_domain_fer\papers/visualization/JAFFE_ESPnet.jpg', dpi=800)
-                          # pdf_save_path=r'F:\cross_domain_fer\papers\First\Trans\TLA\figs\fusion_matrix/Raf-expw.jpg', dpi=800)
-                          pdf_save_path=r'F:\cross_domain_fer\papers\First\Trans\ESPnet\JMME_figs\fusion_matrix/fer2exp.jpg', dpi=800)
+                          pdf_save_path=r'.\fusion_matrix/fer2exp.jpg', dpi=800)

@@ -33,7 +33,7 @@ python test.py --model-file OSA.pth
 
 You can download pretrained models here:
 
---
+coming soon
 
 ## Contributing
 We propose an Object-Semantic Alignment (OSA) model that incorporates dynamic coordinate attention, joint mutual information, and marginal entropy loss to enhance the domain invariance of facial representations and mitigate domain shifts.

@@ -18,7 +18,7 @@ pip install -r requirements.txt
 To train the model(s) in the paper, run this command:
 
 ```train
-python main.py --source_train_path <path_to_source_train_data> --target_train_path <path_to_target_train_data> --target_test_path <path_to_target_test_data> --pretrained <path_to_initial_weights> --learn_rate 1e-4 --lam1 1 --lam2 1
+python main.py --train_list0 <path_to_source_train_data> --test_list6 <path_to_target_train_data> --test_list10 <path_to_target_test_data> --pretrained <path_to_initial_weights> --learn_rate 1e-4 --lambda_1 1.0 --lambda_2 1.0
 ```
 
 ## Evaluation
@@ -33,7 +33,8 @@ python test.py --model-file OSA.pth
 
 You can download pretrained models here:
 
-coming soon
+- [OSA_R2S](https://drive.google.com/file/d/1-1vIODhdZzdTOMXSgq-0LArVblmcF5or/view?usp=drive_link) trained on SFEW using RAF-DB as source domain.
+
 
 ## Contributing
 We propose an Object-Semantic Alignment (OSA) model that incorporates dynamic coordinate attention, joint mutual information, and marginal entropy loss to enhance the domain invariance of facial representations and mitigate domain shifts.

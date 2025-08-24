@@ -88,12 +88,12 @@ class Trainer:
                 output_2, mu_2, ad_out_2 = model(data_2_img)
 
                 train_acc_1 = self.accuracy(output_1.data, data_1_label.data, (1,))[0]
-                loss_1 = self.criterion_cls(output_1, data_1_label)
+                # loss_1 = self.criterion_cls(output_1, data_1_label)
                 # en_loss = entropy_loss(output_2)
                 # en_loss = information_maximization_loss(output_2)
 
                 labels_target_fake = torch.max(torch.nn.Softmax(dim=1)(output_2), 1)[1]
-                ad_out = torch.cat([ad_out_1, ad_out_2], dim=0)
+                # ad_out = torch.cat([ad_out_1, ad_out_2], dim=0)
                 # logit = torch.cat([output_1, output_2], dim=0)
                 mi_loss = mi_loss_mlp(mu_1, mu_2, data_1_label, labels_target_fake, self.q_net)
 
@@ -106,7 +106,7 @@ class Trainer:
                 # # je_loss = logit_kl(mu_1, mu_2, data_1_label, labels_target_fake)
                 '''Cross-entropy loss'''
                 exp_loss = self.criterion_cls(output_1, data_1_label)
-                loss = exp_loss + mi_loss + je_loss
+                loss = exp_loss + self.args.lambda_1*mi_loss + self.args.lambda_2*je_loss
 
                 self.optimizer4nn.zero_grad()
                 loss.backward()

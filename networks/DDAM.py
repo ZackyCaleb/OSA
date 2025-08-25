@@ -148,7 +148,7 @@ class DCA(nn.Module):
 #         self.num_head = num_head
 #         for i in range(int(num_head)):
 #             setattr(self,"cat_head%d" %(i), CoordAttHead())
-#         # self.dsa = DynamicCoordinateAttention(in_channels=512, n_directions=num_head)
+#         # self.dsa = DCA(in_channels=512, n_directions=num_head)
 #         self.Linear = Linear_block(512, 512, groups=512, kernel=(7, 7), stride=(1, 1), padding=(0, 0))
 #         self.flatten = Flatten()
 #         self.fc = nn.Linear(512, num_class)
@@ -496,7 +496,7 @@ class DDAMNet(nn.Module):
         # self.CA = CoTAttention(dim=512, kernel_size=3)
         # self.CA = Attention(dim=512, kernel_size=3)
         # self.CA = PC_Attention(dim=512, kernel_size=3)
-        self.dsa = DynamicCoordinateAttention(in_channels=512, n_directions=num_head)
+        self.dsa = DCA(in_channels=512, n_directions=num_head)
         # self.CA = CoordAttHead()
         self.Linear = Linear_block(512, 512, groups=512, kernel=(7, 7), stride=(1, 1), padding=(0, 0))
         self.flatten = Flatten()

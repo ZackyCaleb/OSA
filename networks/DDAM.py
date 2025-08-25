@@ -119,13 +119,11 @@ class DCA(nn.Module):
             att = self.att_convs[d](transformed[d * N:(d + 1) * N])  # [N,C,H,W]    # 对每个方向卷积生成独立的注意力图
             atts.append(att.sigmoid())
 
-        # 步骤4：多方向注意力融合 ---------------------------------------------
         fused_att = torch.zeros_like(x)
         for d in range(self.n_directions):
             weight = self.fusion[d].sigmoid()  # 方向权重
             fused_att += weight * atts[d]
 
-        # 步骤5：应用注意力 --------------------------------------------------
         return identity * fused_att
 
 # class DDAMNet(nn.Module):

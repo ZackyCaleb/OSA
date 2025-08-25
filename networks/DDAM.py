@@ -26,15 +26,8 @@ class Flatten(Module):
     def forward(self, input):
         return input.view(input.size(0), -1)
 
-class DynamicCoordinateAttention(nn.Module):
+class DCA(nn.Module):
     def __init__(self, in_channels, n_directions=2, reduction=32):
-        """
-        动态方向注意力机制
-        Args:
-            in_channels: 输入通道数
-            reduction: 通道压缩比例
-            n_directions: 方向数（默认为2，可扩展）
-        """
         super().__init__()
         self.n_directions = n_directions
         self.in_channels = in_channels
@@ -91,10 +84,6 @@ class DynamicCoordinateAttention(nn.Module):
         return torch.stack(directions, dim=1)  # [N,D,C,H,W]
 
     def _create_deform_grid(self, H, W, cos_theta, sin_theta, scale):
-        """
-        创建可变形池化网格
-        返回：变形后的网格坐标 [N,H,W,2]
-        """
         N = cos_theta.size(0)
 
         # 基础坐标网格
@@ -120,17 +109,14 @@ class DynamicCoordinateAttention(nn.Module):
         identity = x    # (B, 512, 7, 7)
         N, C, H, W = x.size()
 
-        # 步骤1：生成动态方向参数 ------------------------------------------------
         dir_params = self.dir_generator(x)  # [N, 2*D, 1, 1]=(B, 6, 1, 1)
         dir_params = dir_params.view(N, self.n_directions, 2)   # (B, 3, 2)
         theta = torch.sigmoid(dir_params[:, :, 0])  # 角度参数 [0,1] -> [0, π]=(B, 3)
         scale = 0.5 + torch.sigmoid(dir_params[:, :, 1])  # 缩放因子 [0.5, 1.5]=(B, 3)
 
-        # 步骤2：动态方向池化 --------------------------------------------------
         pooled = self._dynamic_pooling(x, theta, scale)  # [N,D,C,H,W]=(B,3,512,7,7)
         pooled = pooled.view(N * self.n_directions, C, H, W)    # (3B, 512, 7, 7)
 
-        # 步骤3：特征变换和注意力生成 ------------------------------------------
         transformed = self.conv(pooled)  # [N*D, mid, H, W]     # (3B, 16, 7, 7)
 
         # 生成各方向注意力图

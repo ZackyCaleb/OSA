@@ -57,12 +57,6 @@ class DCA(nn.Module):
         self.fusion = nn.Parameter(torch.ones(n_directions) / n_directions, requires_grad=True) # 学习对应方向的参数
 
     def _dynamic_pooling(self, x, theta, scale):
-        """
-        动态方向池化
-        x: 输入特征 [N,C,H,W]
-        theta: 方向角度 [N,D] (D为方向数)
-        scale: 池化范围缩放因子 [N,D]
-        """
         N, C, H, W = x.size()
         device = x.device
 

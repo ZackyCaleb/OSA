@@ -32,7 +32,7 @@ python test.py --model-file OSA.pth
 
 You can download pretrained models here:
 
-- [OSA_R2S](https://drive.google.com/file/d/1-1vIODhdZzdTOMXSgq-0LArVblmcF5or/view?usp=drive_link) trained on SFEW using RAF-DB as source domain.
+- [OSA_R2S](https://drive.google.com/file/d/1-1vIODhdZzdTOMXSgq-0LArVblmcF5or/view?usp=drive_link).
 
 ## Acknowledgment
 1. [Li Y, Zhang Z, Chen B, et al. Deep Margin-Sensitive Representation Learning for Cross-Domain Facial Expression Recognition[J]. IEEE Transactions on Multimedia, 2023, 25: 1359-1373.](https://ieeexplore.ieee.org/abstract/document/9676449)

@@ -1,8 +1,7 @@
 
-# Object-Semantic Alignment Across Domains: Enhancing Domain Invariance of Facial Expression Features for Unsupervised Domain Adaptation
-[//]: # We propose an Object-Semantic Alignment (OSA) model that incorporates dynamic coordinate attention, joint mutual information, and marginal entropy loss to enhance the domain invariance of facial representations and mitigate domain shifts.
-## Data Preparation
-   * Downloading the original images after obtaining official authorization for the mentioned datasets: [RAF-DB](http://whdeng.cn/RAF/model1.html), [KDEF](http://www.emotionlab.se/kdef/), [MMI](https://www.mmifacedb.eu/search/#), [SFEW](https://users.cecs.anu.edu.au/~few_group/AFEW.html), [Affectnet](http://mohammadmahoor.com/affectnet/), [FER2013](https://github.com/gitshanks/fer2013), [ExpW](https://mmlab.ie.cuhk.edu.hk/projects/socialrelation/index.html).
+# OSA
+ ## Data Preparation
+   * Downloading official data: RAF-DB, KDEF, MMi, SFEW2.0, FER2013, and ExpW
    * Allocating training and testing datasets.
 
 ## Requirements

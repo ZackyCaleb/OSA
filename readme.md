@@ -1,5 +1,4 @@
 
-# OSA
  ## Data Preparation
    * Downloading official data: RAF-DB, KDEF, MMi, SFEW2.0, FER2013, and ExpW
    * Allocating training and testing datasets.
